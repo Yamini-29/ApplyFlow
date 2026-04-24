@@ -20,28 +20,34 @@ export default function YetToApplyPage() {
     const data = await res.json()
     setItems(data)
   }
-  const moveToApplications = async(item:any)=>{
-
-await fetch("/api/applications",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-company:item.company,
-role:item.role,
-status:"Applied"
-})
-})
-
-await fetch(`/api/yettoapply/${item._id}`,{
-method:"DELETE"
-})
-
-fetchItems()
-
+  const deleteYetToApply = async (id: string) => {
+  await fetch(`/api/yettoapply/${id}`, {
+    method: "DELETE"
+  })
+  fetchItems()
 }
 
+const moveToApplications = async (item: any) => {
+
+  await fetch("/api/applications", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      company: item.company,
+      role: item.role,
+      status: "Applied",
+      jobLink: item.jobLink
+    })
+  })
+
+  await fetch(`/api/yettoapply/${item._id}`, {
+    method: "DELETE"
+  })
+
+  fetchItems()
+}
   return (
 
     <AppLayout>
@@ -138,18 +144,12 @@ className="block w-full text-left px-4 py-2 hover:bg-neutral-800"
 Edit
 </button>
 
-<button
-onClick={()=>moveToApplications(item)}
-className="block w-full text-left px-4 py-2 hover:bg-neutral-800 text-green-400"
->
-Move to Applications
+<button onClick={()=>deleteYetToApply(item._id)}>
+Delete
 </button>
 
-<button
-onClick={()=>deleteYetToApply(item._id)}
-className="block w-full text-left px-4 py-2 hover:bg-neutral-800 text-red-400"
->
-Delete
+<button onClick={()=>moveToApplications(item)}>
+Move to Applications
 </button>
 
 </div>

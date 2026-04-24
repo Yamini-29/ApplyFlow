@@ -9,6 +9,7 @@ type Application = {
   company: string
   role: string
   status: string
+  jobLink: string
 }
 
 export default function ApplicationsTable() {
@@ -116,6 +117,7 @@ const deleteApplication = async(id:string)=>{
               <th className="p-5 text-left">Company</th>
               <th className="p-5 text-left">Role</th>
               <th className="p-5 text-left">Status</th>
+              <th className="p-5 text-left">Job Link</th>
               <th className="p-5 text-left w-10"></th>
             </tr>
           </thead>
@@ -139,6 +141,11 @@ const deleteApplication = async(id:string)=>{
                   <td className="p-5">{app.company}</td>
 
                   <td className="p-5">{app.role}</td>
+                  <td>
+  <a href={app.jobLink} target="_blank" className="text-blue-400">
+    View
+  </a>
+</td>
 
                   <td className="p-5">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusStyle(app.status)}`}>

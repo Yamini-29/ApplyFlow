@@ -11,6 +11,7 @@ const [referralName,setReferralName]=useState("")
 const [referralContact,setReferralContact]=useState("")
 const [reminderDate,setReminderDate]=useState("")
 const [notes,setNotes]=useState("")
+const [jobLink, setJobLink] = useState("")
 
 const save = async()=>{
 
@@ -22,6 +23,7 @@ headers:{
 body:JSON.stringify({
 company,
 role,
+jobLink,
 stage,
 referralName,
 referralContact,
@@ -35,8 +37,16 @@ close()
 }
 
 return(
-
+<div
+  className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+  onClick={close}
+>
+    <div
+  className="bg-neutral-900 p-6 rounded-xl w-[400px]"
+  onClick={(e) => e.stopPropagation()}
+>
 <div className="bg-neutral-900 p-6 rounded-xl w-[400px]">
+    
 
 <h2 className="text-lg mb-4">
 Add Yet To Apply
@@ -54,6 +64,12 @@ placeholder="Role"
 value={role}
 onChange={(e)=>setRole(e.target.value)}
 className="w-full mb-3 p-2 bg-neutral-800 rounded"
+/>
+<input
+  placeholder="Job link"
+  value={jobLink}
+  onChange={(e) => setJobLink(e.target.value)}
+  className="w-full mb-3 p-2 bg-neutral-800 rounded"
 />
 
 <select
@@ -104,9 +120,9 @@ className="bg-orange-500 px-4 py-2 rounded"
 >
 Save
 </button>
-
 </div>
-
+</div>
+</div>
 )
 
 }

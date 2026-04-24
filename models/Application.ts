@@ -10,10 +10,10 @@ const ApplicationSchema = new mongoose.Schema({
   },
   jobLink: String,
   notes: String,
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  appliedDate: {
+  type: Date,
+  default: Date.now
+}
 });
 
 export default mongoose.models.Application ||
